@@ -1,0 +1,23 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-24T18:21:18-05:00",
+  "id": "building-a-view",
+  "duration": 59,
+  "title": "Building an android app with MVVM Architecture(1) - UI",
+  "authors": "Sean Jin Han",
+  "summary": "Building a View - Kotlin",
+  "source": "20_View.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "android mvvm architecture"
+  ],
+  "tags": [],
+  "feedback": "https://sagaj.io",
+  "url": "building-a-view"
+}

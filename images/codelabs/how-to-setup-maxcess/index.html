@@ -1,0 +1,147 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>How to Setup Maxcess System</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="how-to-setup-maxcess"
+                  title="How to Setup Maxcess System"
+                  environment="web"
+                  feedback-link="https://andy.io">
+    
+      <google-codelab-step label="Overview" duration="1">
+        <p>Scrapes franchise data from franchise.ftc.go.kr and inserts it into a MySQL database.</p>
+<h2 is-upgraded>What To Be Installed (or Upgraded)</h2>
+<ul>
+<li>python3.6</li>
+<li>python3-venv</li>
+<li>pip</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Prerequisites" duration="1">
+        <p>fcscraper needs at least Python 3.6 to run.</p>
+<h2 is-upgraded>python3.6&#34;</h2>
+<pre><code>  sudo apt-get install python3.6``
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Installation" duration="10">
+        <ul>
+<li>Locate and enter the root folder of the source distribution. E.g.<pre><code>cd ~/fcscraper/``
+// Install Python virtual environment
+sudo apt-get install python3-venv``
+</code></pre>
+</li>
+<li>Create a new Python virtual environment<pre><code>sudo python3 -m venv .venv``
+</code></pre>
+</li>
+<li>Activate the virtual environment<pre><code>source .venv/bin/activate
+</code></pre>
+</li>
+<li>Upgrade pip to the latest version<pre><code>sudo pip install --upgrade pip
+</code></pre>
+</li>
+<li>Install fcscraper<pre><code>sudo python3 setup.py install
+</code></pre>
+</li>
+<li>Give fscraper your database credentials in <code>config.yaml</code></li>
+<li>Run fcscraper<pre><code>fcscraper
+</code></pre>
+</li>
+</ul>
+<p>(Optional) Copy and paste your entire .scrapy folder to the running folder to import previous cache storage.<br> Your directory should look similar to this:</p>
+<pre><code>  fcscraper/
+      .scrapy/
+          httpcache/
+      src/
+      README.rst
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Usage" duration="3">
+        <pre><code>fcscraper [options] URLs
+
+URLs            The URLs to start crawling from, separated by space.
+--clear-cache   Clear cache and run. Not recommended. Scrapy automatically 
+                compares cached versions to the live pages and fetches the most
+                recent anyway.
+--concurrent    Set a max number of concurrent requests
+--config        Specify the configuration file to use   
+--debug         Run in debug mode. Only affects what gets output to logs.
+--delay         Set a delay between http requests (in seconds)
+--file          Path to custom configuration file
+--help          Display help
+--json          Output scraped items in json instead of updating the db
+--limit         Set the max number of requests to send before exiting
+--lines         If --json is also set, output a jsonlines file
+--version       Display version
+--offline       Run the program in offline mode. Note: this does not prevent 
+                new requests to the server. You should disable your network 
+                adapter as well.
+--version       Show version.
+-c              Shorthand for --config
+-d              Shorthand for --delay
+-h              Shorthand for --help
+-j              Shorthand for --json
+-l              Shorthand for --limit
+-n              Shorthand for --concurrent
+-v              Shorthand for --version
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Examples" duration="2">
+        <pre><code>.. csv-table::
+   :header: &#34;Command&#34;, &#34;Description&#34;
+   :widths: 20, 59
+
+   &#34;``fcscraper``&#34;, &#34;Scrape all franchises&#34;
+   &#34;``fcscraper --clear-cache``&#34;, &#34;Clear cache and scrape all&#34;
+   &#34;``fcscraper -d 3``&#34;, &#34;Scrape with a delay of 3 seconds between requests&#34;
+   &#34;``fcscraper --offline -n 32``&#34;, &#34;Scrape with a maximum of 32 concurrent connections to the domain in offline mode (useful when exclusively using cached pages)&#34;
+   &#34;``fcscraper -c custom_configs.yml``&#34;, &#34;Scrape using configurations stored in ``custom_configs.yml``&#34;
+   &#34;``fcscraper -l 5 -j``&#34;, &#34;Scrape 5 and output as JSON&#34;
+   &#34;``fcscraper -l 50 -j --lines``&#34;, &#34;Scrape 50 and output as JSONlines&#34;
+   &#34;``fcscraper -l 10``&#34;, &#34;Scrape 10&#34;
+   &#34;``fcscraper -j https://franchise.ftc.go.kr/user/extra/main/62/firMst/view/jsp/LayOutPage.do?dataIdx=75545``&#34;, &#34;Scrape the given page and output as JSON&#34;
+   &#34;``fcscraper -j 75506``&#34;, &#34;Shorthand for above command&#34;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>
